@@ -49,6 +49,24 @@ class DarkPool(threading.Thread):
     async def login(self):
         logging.info("Logging-in to flowalgo!")
         self.driver.get(self.url)
+        try:
+            WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[@id="login"]/input[1]')
+                    )
+                )
+            WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[@id="login"]/input[2]')
+                    )
+                )
+            WebDriverWait(self.driver, 15).until(
+                    EC.presence_of_element_located(
+                        (By.XPATH, '//*[@id="login"]/input[3]')
+                    )
+                )
+        except seleniumExceptions.TimeoutException:
+            await self.login()
         username_input = self.driver.find_element_by_xpath(
             '//*[@id="login"]/input[1]')
         password_input = self.driver.find_element_by_xpath(
