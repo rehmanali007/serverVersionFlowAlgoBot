@@ -48,7 +48,9 @@ class AlphaAI(threading.Thread):
         self.chrome_options.add_argument('--disable-dev-shm-usage')
         self.chrome_options.add_argument('--no-sandbox')
         self.chrome_options.add_argument('--ignore-certificate-errors')
-        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options)
+        caps = webdriver.DesiredCapabilities.CHROME.copy()
+        caps['acceptInsecureCerts'] = True
+        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options,desired_capabilities=caps)
         # self.driver = webdriver.Chrome(driver_path, options=options)
         self.data_file = data_file
         self.target_channel_name = target_channel_name
