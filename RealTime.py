@@ -50,7 +50,7 @@ class RealTime(threading.Thread):
         self.chrome_options.add_argument('--ignore-certificate-errors')
         caps = webdriver.DesiredCapabilities.CHROME.copy()
         caps['acceptInsecureCerts'] = True
-        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options,desired_capabilities=caps)
+        self.driver = webdriver.Chrome(options=self.chrome_options,desired_capabilities=caps)
         self.data_file = data_file
         self.target_channels_names = target_channels_names
         self.target_channels = {
