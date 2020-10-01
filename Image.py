@@ -36,18 +36,18 @@ class Image(threading.Thread):
         self.url = url
         self.password = password
         self.username = username
-        options = Options()
-        options.add_argument('--no-sandbox')
-        options.add_argument('--disable-dev-shm-usage')
-        options.add_argument('--headless')
-        options.add_argument('--disable-gpu')
-        options.add_argument('--ignore-certificate-errors')
-        options.add_argument('--ignore-ssl-errors')
-        options.add_argument('--allow-insecure-localhost')
-        options.add_argument('--allow-running-insecure-content')
-        options.add_argument('--disable-extensions')
-        options.add_argument('--start-maximized')
-        self.driver = webdriver.Chrome(driver_path, options=options)
+        self.chrome_options = webdriver.ChromeOptions()
+        self.chrome_options.add_argument("--window-size=1920,1080")
+        self.chrome_options.add_argument("--disable-extensions")
+        self.chrome_options.add_argument("--proxy-server='direct://'")
+        self.chrome_options.add_argument("--proxy-bypass-list=*")
+        self.chrome_options.add_argument("--start-maximized")
+        self.chrome_options.add_argument('--headless')
+        self.chrome_options.add_argument('--disable-gpu')
+        self.chrome_options.add_argument('--disable-dev-shm-usage')
+        self.chrome_options.add_argument('--no-sandbox')
+        self.chrome_options.add_argument('--ignore-certificate-errors')
+        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options)
         self.target_channel_name = target_channel_name
         self.target_channel = None
         self.KILL = False
