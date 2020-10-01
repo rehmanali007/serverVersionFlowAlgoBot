@@ -96,8 +96,8 @@ image = Image(
 
 alpha_ai.start()
 time.sleep(3)
-darkpool.start()
+# darkpool.start()
 time.sleep(3)
-realtime.start()
+# realtime.start()
 time.sleep(3)
-image.start()
+# image.start()
