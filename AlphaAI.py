@@ -37,12 +37,18 @@ class AlphaAI(threading.Thread):
         self.url = url
         self.password = password
         self.username = username
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-gpu')
-        chrome_options.add_argument('--start-maximized')
-        self.driver = webdriver.Chrome(driver_path, options=chrome_options)
+        options = Options()
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--headless')
+        options.add_argument('--disable-gpu')
+        options.add_argument('--ignore-certificate-errors')
+        options.add_argument('--ignore-ssl-errors')
+        options.add_argument('--allow-insecure-localhost')
+        options.add_argument('--allow-running-insecure-content')
+        options.add_argument('--disable-extensions')
+        options.add_argument('--start-maximized')
+        self.driver = webdriver.Chrome(driver_path, options=options)
         self.data_file = data_file
         self.target_channel_name = target_channel_name
         self.target_channel = None

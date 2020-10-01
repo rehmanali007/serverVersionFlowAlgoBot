@@ -34,8 +34,9 @@ site_password = config["FLOWALGO"]["password"]
 token = config["DISCORD"]["bot_token"]
 
 url = "https://app.flowalgo.com/users/login"
-data_file = shelve.open("./tmps/data")
 
+if not os.path.exists('./tmps'):
+    os.mkdir('./tmps')
 
 target_channels_names = {
     "no_color": no_color_channel_name,
