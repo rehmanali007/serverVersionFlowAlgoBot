@@ -39,6 +39,9 @@ class DarkPool(threading.Thread):
         self.username = username
         chrome_options = Options()
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--start-maximized')
         self.driver = webdriver.Chrome(driver_path, options=chrome_options)
         self.data_file = data_file
         self.target_channel_name = target_channel_name
@@ -66,6 +69,7 @@ class DarkPool(threading.Thread):
                     )
                 )
         except seleniumExceptions.TimeoutException:
+            logging.info('Timeout occured!')
             await self.login()
         username_input = self.driver.find_element_by_xpath(
             '//*[@id="login"]/input[1]')
@@ -94,6 +98,7 @@ class DarkPool(threading.Thread):
             )
         except seleniumExceptions.TimeoutException:
             pass
+        logging.info('Login successfull!')
         self.FLOW_LOGIN = True
 
     # Remove emojies from strings

@@ -39,6 +39,9 @@ class RealTime(threading.Thread):
         self.username = username
         chrome_options = Options()
         chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--start-maximized')
         self.driver = webdriver.Chrome(driver_path, options=chrome_options)
         self.data_file = data_file
         self.target_channels_names = target_channels_names
@@ -71,6 +74,7 @@ class RealTime(threading.Thread):
                     )
                 )
         except seleniumExceptions.TimeoutException:
+            logging.info('Timeout occured!')
             await self.login()
         username_input = self.driver.find_element_by_xpath(
             '//*[@id="login"]/input[1]')
@@ -99,6 +103,7 @@ class RealTime(threading.Thread):
             )
         except seleniumExceptions.TimeoutException:
             pass
+        logging.info('Login Successfull!')
         self.FLOW_LOGIN = True
 
     # Remove emojies from strings
@@ -207,13 +212,13 @@ class RealTime(threading.Thread):
                 )
             )
         except seleniumExceptions.TimeoutException:
-            self.get_flow_options_data()
+            self.run_scraper()
             return
         finally:
             try:
                 pass
             except seleniumExceptions.ElementNotInteractableException:
-                self.get_flow_options_data()
+                self.run_scraper()
             ai_btn.click()
             darkpool_btn.click()
             fullscreen_btn.click()
@@ -293,7 +298,7 @@ class RealTime(threading.Thread):
             try:
                 pass
             except seleniumExceptions.ElementNotInteractableException:
-                self.get_flow_options_data()
+                self.run_scraper()
             ai_btn.click()
             darkpool_btn.click()
             fullscreen_btn.click()
