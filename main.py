@@ -46,7 +46,7 @@ target_channels_names = {
 if not os.path.exists("./tmps"):
     os.mkdir("./tmps")
 
-data_file = shelve.open("./tmps/data")
+alpha_ai_data_file = shelve.open("./tmps/alpha_ai_data_file")
 
 alpha_ai = AlphaAI(
     1,
@@ -57,8 +57,12 @@ alpha_ai = AlphaAI(
     site_password,
     token,
     ai_channel_name,
-    data_file,
+    alpha_ai_data_file,
 )
+
+darkpool_data_file = shelve.open("./tmps/darkpool_data_file")
+
+
 darkpool = DarkPool(
     10,
     "darkpool",
@@ -68,8 +72,11 @@ darkpool = DarkPool(
     site_password,
     token,
     darkpool_channel_name,
-    data_file,
+    darkpool_data_file,
 )
+
+
+realtime_data_file = shelve.open("./tmps/realtime_data_file")
 realtime = RealTime(
     20,
     "realtime",
@@ -79,7 +86,7 @@ realtime = RealTime(
     site_password,
     token,
     target_channels_names,
-    data_file,
+    realtime_data_file,
 )
 image = Image(
     40, "image", driver_path, url, site_username, site_password, token, ta_channel_name,
