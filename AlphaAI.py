@@ -53,7 +53,7 @@ class AlphaAI(threading.Thread):
         self.chrome_options.add_experimental_option('useAutomationExtension', False)
         user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
         self.chrome_options.add_argument(f'user-agent={user_agent}')
-        self.driver = webdriver.Chrome(options=self.chrome_options)
+        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options)
         # self.driver = webdriver.Chrome(driver_path, options=options)
         self.data_file = data_file
         self.target_channel_name = target_channel_name

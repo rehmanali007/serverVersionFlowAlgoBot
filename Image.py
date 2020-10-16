@@ -49,9 +49,7 @@ class Image(threading.Thread):
         self.chrome_options.add_argument('--ignore-certificate-errors')
         user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36'
         self.chrome_options.add_argument(f'user-agent={user_agent}')
-        caps = webdriver.DesiredCapabilities.CHROME.copy()
-        caps['acceptInsecureCerts'] = True
-        self.driver = webdriver.Chrome(options=self.chrome_options,desired_capabilities=caps)
+        self.driver = webdriver.Chrome(driver_path, options=self.chrome_options)
         self.target_channel_name = target_channel_name
         self.target_channel = None
         self.KILL = False
